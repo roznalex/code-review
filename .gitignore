@@ -1,0 +1,6 @@
+.idea
+target
+kickstarter.iml
+pom.xml
+src/main/webapp
+src/main/recources
