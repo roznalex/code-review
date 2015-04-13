@@ -18,8 +18,8 @@ public class Categories extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-		List<Project> projects = new CopyOnWriteArrayList<Project>();
-		projects.add(new Project("1"));
+	List<Project> projects = new CopyOnWriteArrayList<Project>();
+	projects.add(new Project("1"));
         projects.add(new Project("2"));
         cm.addCategory("IT", projects);
         cm.addCategory("Music", projects);
