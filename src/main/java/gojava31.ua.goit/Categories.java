@@ -13,7 +13,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @WebServlet("/categories")
 public class Categories extends HttpServlet {
-    private static List<Category> categories = new CopyOnWriteArrayList<Category>();
+    private CategoryManager cm = (CategoryManager) getServletContext().getAttribute("categoryManager");
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -21,30 +21,17 @@ public class Categories extends HttpServlet {
 		List<Project> projects = new CopyOnWriteArrayList<Project>();
 		projects.add(new Project("1"));
         projects.add(new Project("2"));
-        addCategory("IT", projects);
-        addCategory("Music", projects);
-        addCategory("Films", projects);
+        cm.addCategory("IT", projects);
+        cm.addCategory("Music", projects);
+        cm.addCategory("Films", projects);
      }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
         PrintWriter writer = response.getWriter();
         String uri = request.getRequestURI();
-        for (Category category : categories) {
+        for (Category category : cm.getAllCategories()) {
             writer.write(String.format("<a href=\"/viewcategory?category=%s\">%s</a><br>", category.getName(), category.getName()));
         }
-    }
-
-    private static void addCategory(String name, List<Project> projects) {
-        categories.add(new Category(name, projects));
-    }
-
-    public static Category getCategory(String name) {
-        for (Category category : categories) {
-            if (category.getName().equals(name)) {
-                return category;
-            }
-        }
-        return null;
     }
 }

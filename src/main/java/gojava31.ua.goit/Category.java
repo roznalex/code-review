@@ -1,8 +1,10 @@
 package gojava31.ua.goit;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Category {
+public final class Category {
     private String name;
     private List<Project> projects;
 
@@ -23,7 +25,9 @@ public class Category {
     }
 
     public List<Project> getProjects() {
-        return projects;
+        List<Project> clone = new CopyOnWriteArrayList<Project>();
+        Collections.copy(clone, projects);
+        return clone;
     }
 
     public void addProject(String name) {

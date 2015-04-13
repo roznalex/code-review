@@ -1,6 +1,6 @@
 package gojava31.ua.goit;
 
-public class Project {
+public final class Project {
     private String name;
 
     public Project() {
